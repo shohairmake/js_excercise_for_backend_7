@@ -11,4 +11,17 @@ class Todo {
     }
 };
 
-module.exports = {};
+for(let i = 0; i < 5; i++){
+    const num = i + 1;
+    const todo = new Todo({
+        title: 'タイトル' + num,
+        body: 'ボディ'　+ num 
+    });
+    todos.push(todo);
+}
+
+module.exports = {
+    findAll: () => {
+        return todos.slice();
+    }
+};

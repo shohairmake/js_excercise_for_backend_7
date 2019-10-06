@@ -2,7 +2,7 @@ const todos = [];
 let nextId = 1;
 
 class Todo {
-    constructor({title,body}){
+    constructor({title, body}){
         this.id = nextId++;
         this.title = title;
         this.body = body;

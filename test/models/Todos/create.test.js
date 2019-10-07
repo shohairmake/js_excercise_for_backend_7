@@ -2,7 +2,7 @@ const assert = require('power-assert');
 const Todo = require('../../../models/Todo');
 
 describe('create Todo test', () => {
-    it('引数にタイトルプロパティがないとエラーになる', () => {
+    it('引数にtitleプロパティがないとエラーになる', () => {
         const dataList = [
             {},
             {body: '詳細文'}
@@ -12,12 +12,12 @@ describe('create Todo test', () => {
                 Todo.create(data);
                 assert.fail();
             } catch (error) {
-            assert.equal(error.message, 'titleは必須です');
+                assert.strictEqual(error.message, 'titleは必須です');
             }
         });
     });
     
-    it('引数にボディプロパティがないとエラーになる', () => {
+    it('引数にbodyプロパティがないとエラーになる', () => {
         try {
             Todo.create({title: 'タイトル'});
             assert.fail();
@@ -34,7 +34,7 @@ describe('create Todo test', () => {
         };
 
         const createdTodo = Todo.create(data);
-        assert.deepEqual(createdTodo, {
+        assert.deepStrictEqual({...createdTodo}, {
             id: createdTodo.id,
             title: data.title,
             body: data.body,
@@ -43,6 +43,6 @@ describe('create Todo test', () => {
         });
 
         const currentTodos = Todo.findAll();
-        assert.strictEqual(oldTodos.length +1, currentTodos.length);
+        assert.strictEqual(oldTodos.length + 1, currentTodos.length);
     });
 });

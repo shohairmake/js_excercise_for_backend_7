@@ -5,7 +5,7 @@ describe('update todo', () => {
     it('引数にidプロパティ（１以上の数値）がないとエラーになる', () => {
         const invalidDataList = [
             {},
-            {id: -1},
+            {id: - 1},
             {id: 0},
             {id: null},
             {id: {}},

@@ -5,7 +5,7 @@ describe('update todo', () => {
     it('引数にidプロパティ（１以上の数値）がないとエラーになる', () => {
         const invalidDataList = [
             {},
-            {id: - 1},
+            {id: -1},
             {id: 0},
             {id: null},
             {id: {}},
@@ -68,9 +68,9 @@ describe('update todo', () => {
         };
         const updatedTodo = Todo.update(data);
         assert.deepStrictEqual({...updatedTodo}, {
-            id: updatedTodo.id,
-            title: updatedTodo.title,
-            body: updatedTodo.body,
+            id: data.id,
+            title: data.title,
+            body: data.body,
             createdAt: updatedTodo.createdAt,
             updatedAt: updatedTodo.updatedAt
         });

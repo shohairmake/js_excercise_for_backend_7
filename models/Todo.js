@@ -39,7 +39,7 @@ module.exports = {
 
         return todo;
     },
-    update: ({id,title,body}) => {
+    update: ({id, title, body}) => {
         if(typeof id !== 'number' || id < 1){
             throw new Error('idは必須です（1以上の数値)');
         }

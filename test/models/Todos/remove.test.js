@@ -3,7 +3,7 @@ const Todo = require('../../../models/Todo');
 
 describe('Todo.remove', () => {
     it('引数idが1以上の数値でなければエラーを返す', () => {
-        const flag = [
+        const invalidValues = [
             0,
             -1,
             null,
@@ -11,8 +11,8 @@ describe('Todo.remove', () => {
             {},
             '1'
         ];
-        
-        flag.forEach((data) => {
+
+        invalidValues.forEach((data) => {
             try {
                 Todo.remove(data);
                 assert.fail();
@@ -27,7 +27,7 @@ describe('Todo.remove', () => {
         try {
             Todo.remove(notExistedId);
             assert.fail();
-        } catch(error) {
+        } catch (error) {
             assert.strictEqual(error.message, 'idに該当するtodoが存在しません');
         }
     });
@@ -37,7 +37,7 @@ describe('Todo.remove', () => {
         const existedId = 3;
         const removeTodo = Todo.remove(existedId);
 
-        assert.deepStrictEqual({...removeTodo}, {
+        assert.deepStrictEqual({ ...removeTodo }, {
             id: existedId,
             title: removeTodo.title,
             body: removeTodo.body,

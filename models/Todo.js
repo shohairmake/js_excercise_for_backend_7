@@ -2,7 +2,7 @@ const todos = [];
 let nextId = 1;
 
 class Todo {
-    constructor({title, body}){
+    constructor({ title, body }) {
         this.id = nextId++;
         this.title = title;
         this.body = body;
@@ -11,11 +11,11 @@ class Todo {
     }
 };
 
-for(let i = 0; i < 5; i++){
+for (let i = 0; i < 5; i++) {
     const num = i + 1;
     const todo = new Todo({
         title: 'タイトル' + num,
-        body: 'ボディ'　+ num 
+        body: 'ボディ' + num
     });
     todos.push(todo);
 }
@@ -23,12 +23,12 @@ for(let i = 0; i < 5; i++){
 module.exports = {
     findAll: () => {
         return todos.slice();
-    }, 
-    create: ({title, body}) => {
-        if(!title){
+    },
+    create: ({ title, body }) => {
+        if (!title) {
             throw new Error('titleは必須です');
         }
-        if(!body){
+        if (!body) {
             throw new Error('bodyは必須です');
         }
         const todo = new Todo({
@@ -39,18 +39,18 @@ module.exports = {
 
         return todo;
     },
-    update: ({id, title, body}) => {
-        if(typeof id !== 'number' || id < 1){
+    update: ({ id, title, body }) => {
+        if (typeof id !== 'number' || id < 1) {
             throw new Error('idは必須です（1以上の数値)');
         }
-        if(!title){
+        if (!title) {
             throw new Error('titleは必須です');
         }
-        if(!body){
+        if (!body) {
             throw new Error('bodyは必須です');
         }
         const todo = todos.find(todo => id === todo.id);
-        if(!todo){
+        if (!todo) {
             throw new Error('idに該当するtodoがありません');
         }
         todo.title = title;
@@ -58,5 +58,19 @@ module.exports = {
         todo.updatedAt = new Date();
 
         return todo;
+    },
+    remove: (id) => {
+        if (typeof id !== 'number' || id < 1) {
+            throw new Error('idは必須です（1以上の数値）');
+        }
+
+        const targetIndex = todos.findIndex(todo => id === todo.id);
+        if (targetIndex === -1) {
+            throw new Error('idに該当するtodoが存在しません');
+        }
+
+        const removeTodo = todos.splice(targetIndex, 1)[0];
+
+        return removeTodo;
     }
 };

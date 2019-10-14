@@ -1,6 +1,6 @@
 const Todo = require('../models/Todo');
 
-const toggle_in_error_detail = (error, res) => {
+const toggleInErrorDetail = (error, res) => {
     if (error.message === 'idに該当するtodoがありません') {
         res.status(404).json({ message: error.message });
     } else {
@@ -39,7 +39,7 @@ module.exports = {
             });
             res.status(200).json(updatedTodo);
         } catch (error) {
-            toggle_in_error_detail(error, res);
+            toggleInErrorDetail(error, res);
         }
     },
 
@@ -51,7 +51,7 @@ module.exports = {
             const removedTodo = Todo.remove(parsedId);
             res.status(200).json(removedTodo);
         } catch (error) {
-            toggle_in_error_detail(error, res);
+            toggleInErrorDetail(error, res);
         }
     }
 };

@@ -31,7 +31,12 @@ module.exports = {
             });
             res.status(200).json(updatedTodo);
         } catch (error) {
-            res.status(400).json({ message: error.message });
+            if (error.message === 'idに該当するtodoがありません') {
+                res.status(404).json({ message: error.message });
+            } else {
+                res.status(400).json({ message: error.message });
+            }
+
         }
     }
 };

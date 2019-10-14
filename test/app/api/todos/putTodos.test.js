@@ -22,7 +22,7 @@ describe('test_PUT_/api/comments', () => {
         const response = await requestHelper.request({
             method: 'put',
             endPoint: `/api/comments/${INVALID_ID}`,
-            statusCode: 400
+            statusCode: 404
         }).send(putData);
 
         assert.deepStrictEqual(response.body, {

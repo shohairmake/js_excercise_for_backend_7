@@ -66,7 +66,7 @@ module.exports = {
 
         const targetIndex = todos.findIndex(todo => id === todo.id);
         if (targetIndex === -1) {
-            throw new Error('idに該当するtodoが存在しません');
+            throw new Error('idに該当するtodoがありません');
         }
 
         const removeTodo = todos.splice(targetIndex, 1)[0];

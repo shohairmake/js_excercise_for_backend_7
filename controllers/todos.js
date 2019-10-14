@@ -1,5 +1,13 @@
 const Todo = require('../models/Todo');
 
+const validateRes = (error, res) => {
+    if (error.message === 'idに該当するtodoがありません') {
+        res.status(404).json({ message: error.message });
+    } else {
+        res.status(400).json({ message: error.message });
+    }
+};
+
 module.exports = {
     getTodos: (req, res) => {
         const storeTodos = Todo.findAll();
@@ -31,12 +39,19 @@ module.exports = {
             });
             res.status(200).json(updatedTodo);
         } catch (error) {
-            if (error.message === 'idに該当するtodoがありません') {
-                res.status(404).json({ message: error.message });
-            } else {
-                res.status(400).json({ message: error.message });
-            }
+            validateRes(error, res);
+        }
+    },
 
+    delete: (req, res) => {
+        const id = req.params.id;
+        const parsedId = parseInt(id, 10);
+
+        try {
+            const removedTodo = Todo.remove(parsedId);
+            res.status(200).json(removedTodo);
+        } catch (error) {
+            validateRes(error, res);
         }
     }
 };
